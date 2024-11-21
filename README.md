@@ -39,3 +39,44 @@ This project is configured with **Docker Compose** to simplify running both the 
   ```bash
   git clone https://github.com/your-username/your-repository.git
   cd your-repository
+
+Run the Project
+Start the application with Docker Compose:
+
+docker-compose up --build
+Access the application at http://localhost:3000.
+
+Stop the Application
+To stop the running containers, use:
+
+docker-compose down
+🛠️ Technologies Used
+
+Frontend 🌐
+React.js
+Material UI
+Axios for API calls.
+Backend ⚙️
+Node.js with Express.js
+MongoDB for database management.
+JWT Authentication with bcrypt for secure login.
+Deployment 🚀
+Docker Compose for backend and frontend orchestration.
+📝 Validations
+
+Form Validation: Proper error messages are displayed for empty fields, invalid email formats, etc.
+Server Validation: The backend handles invalid requests securely.
+
+
+🧪 API Endpoints
+
+Authentication
+POST /auth/signup - User Signup.
+POST /auth/login - User Login.
+Employee Management
+GET /employees - List all employees.
+POST /employees - Add a new employee.
+GET /employees/:id - Get employee by ID.
+PUT /employees/:id - Update employee.
+DELETE /employees/:id - Delete employee.
+GET /employees/search - Search employees by department or position.
