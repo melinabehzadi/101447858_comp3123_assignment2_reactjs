@@ -69,6 +69,11 @@ const EmployeeList = () => {
         }
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('token'); // Clear the JWT token
+        navigate('/login'); // Redirect to login page
+    };
+
     return (
         <Box
             sx={{
@@ -82,9 +87,28 @@ const EmployeeList = () => {
                 width: '100%',
             }}
         >
-            <h1 style={{ fontSize: '4rem', marginBottom: '30px', textAlign: 'center' }}>
-                Employee List
-            </h1>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    width: '90%',
+                    marginBottom: '30px',
+                }}
+            >
+                <h1 style={{ fontSize: '4rem', textAlign: 'center', margin: 0 }}>Employee List</h1>
+                <Button
+                    variant="contained"
+                    color="error"
+                    onClick={handleLogout}
+                    sx={{
+                        fontSize: '1.5rem',
+                        padding: '10px 20px',
+                    }}
+                >
+                    Logout
+                </Button>
+            </Box>
             <Box
                 sx={{
                     display: 'flex',
