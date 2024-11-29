@@ -31,13 +31,13 @@ const ViewEmployee = () => {
                     <div style={styles.detailRow}>
                         <FaUser style={styles.icon} />
                         <p>
-                            <strong style={styles.label}>First Name:</strong> {employee.firstName}
+                            <strong style={styles.label}>First Name:</strong> {employee.first_name}
                         </p>
                     </div>
                     <div style={styles.detailRow}>
                         <FaUser style={styles.icon} />
                         <p>
-                            <strong style={styles.label}>Last Name:</strong> {employee.lastName}
+                            <strong style={styles.label}>Last Name:</strong> {employee.last_name}
                         </p>
                     </div>
                     <div style={styles.detailRow}>
@@ -50,6 +50,16 @@ const ViewEmployee = () => {
                         <FaBriefcase style={styles.icon} />
                         <p>
                             <strong style={styles.label}>Position:</strong> {employee.position}
+                        </p>
+                    </div>
+                    <div style={styles.detailRow}>
+                        <p>
+                            <strong style={styles.label}>Salary:</strong> ${employee.salary}
+                        </p>
+                    </div>
+                    <div style={styles.detailRow}>
+                        <p>
+                            <strong style={styles.label}>Date of Joining:</strong> {new Date(employee.date_of_joining).toLocaleDateString()}
                         </p>
                     </div>
                     <div style={styles.detailRow}>

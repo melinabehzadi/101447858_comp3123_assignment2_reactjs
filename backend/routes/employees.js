@@ -19,15 +19,17 @@ router.get('/search', async (req, res) => {
     }
 });
 
+
 // Get all employees
 router.get('/', async (req, res) => {
     try {
-        const employees = await Employee.find();
+        const employees = await Employee.find({}, 'first_name last_name email position department salary date_of_joining'); // Include all fields explicitly
         res.json(employees);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
+
 
 // Get employee by ID
 router.get('/:id', async (req, res) => {
@@ -44,10 +46,18 @@ router.get('/:id', async (req, res) => {
 
 // Add an employee
 router.post('/', async (req, res) => {
-    const { firstName, lastName, email, position, department } = req.body;
+    const { first_name, last_name, email, position, salary, date_of_joining, department } = req.body;
 
     try {
-        const employee = new Employee({ firstName, lastName, email, position, department });
+        const employee = new Employee({
+            first_name,
+            last_name,
+            email,
+            position,
+            salary,
+            date_of_joining,
+            department,
+        });
         await employee.save();
         res.status(201).json(employee);
     } catch (err) {
@@ -55,15 +65,21 @@ router.post('/', async (req, res) => {
     }
 });
 
+
 // Update an employee
 router.put('/:id', async (req, res) => {
     try {
-        const updatedEmployee = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updatedEmployee = await Employee.findByIdAndUpdate(
+            req.params.id,
+            { ...req.body, updated_at: Date.now() },
+            { new: true }
+        );
         res.json(updatedEmployee);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
 });
+
 
 // Delete an employee
 router.delete('/:id', async (req, res) => {

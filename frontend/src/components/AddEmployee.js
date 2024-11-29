@@ -4,19 +4,22 @@ import API from '../api';
 
 const AddEmployee = () => {
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
         position: '',
-        department: ''
+        salary: '',
+        date_of_joining: '',
+        department: '',
     });
+
     const [errors, setErrors] = useState({});
 
     const validateForm = () => {
         const errors = {};
         const nameRegex = /^[A-Za-z\s]+$/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const textRegex = /^[A-Za-z0-9\s]+$/;
+        const salaryRegex = /^[0-9]+$/;
 
         if (!formData.firstName.trim()) {
             errors.firstName = 'First Name is required.';
@@ -38,32 +41,47 @@ const AddEmployee = () => {
 
         if (!formData.position.trim()) {
             errors.position = 'Position is required.';
-        } else if (!textRegex.test(formData.position)) {
-            errors.position = 'Position can only contain letters and numbers.';
+        }
+
+        if (!formData.salary || !salaryRegex.test(formData.salary)) {
+            errors.salary = 'Salary must be a valid number.';
+        }
+
+        if (!formData.date_of_joining) {
+            errors.date_of_joining = 'Date of Joining is required.';
         }
 
         if (!formData.department.trim()) {
             errors.department = 'Department is required.';
-        } else if (!textRegex.test(formData.department)) {
-            errors.department = 'Department can only contain letters and numbers.';
         }
 
         setErrors(errors);
         return Object.keys(errors).length === 0;
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
 
         try {
-            await API.post('/employees', formData);
+            await API.post('/employees', {
+                first_name: formData.firstName, // Use first_name
+                last_name: formData.lastName,  // Use last_name
+                email: formData.email,
+                position: formData.position,
+                department: formData.department,
+                salary: formData.salary,
+                date_of_joining: formData.date_of_joining,
+            });
             alert('Employee added successfully!');
             window.location.href = '/employees';
         } catch (error) {
             alert('Error adding employee');
         }
     };
+
+
 
     return (
         <div style={styles.container}>
@@ -73,12 +91,12 @@ const AddEmployee = () => {
                     <div style={styles.formGroup}>
                         <label style={styles.label}>First Name</label>
                         <div style={styles.row}>
-                            <FaUser style={styles.icon} />
+                            <FaUser style={styles.icon}/>
                             <input
                                 type="text"
                                 placeholder="Enter First Name"
                                 value={formData.firstName}
-                                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                                onChange={(e) => setFormData({...formData, firstName: e.target.value})}
                                 style={styles.input}
                             />
                         </div>
@@ -88,12 +106,12 @@ const AddEmployee = () => {
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Last Name</label>
                         <div style={styles.row}>
-                            <FaUser style={styles.icon} />
+                            <FaUser style={styles.icon}/>
                             <input
                                 type="text"
                                 placeholder="Enter Last Name"
                                 value={formData.lastName}
-                                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                                onChange={(e) => setFormData({...formData, lastName: e.target.value})}
                                 style={styles.input}
                             />
                         </div>
@@ -103,12 +121,12 @@ const AddEmployee = () => {
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Email</label>
                         <div style={styles.row}>
-                            <FaEnvelope style={styles.icon} />
+                            <FaEnvelope style={styles.icon}/>
                             <input
                                 type="email"
                                 placeholder="Enter Email"
                                 value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                onChange={(e) => setFormData({...formData, email: e.target.value})}
                                 style={styles.input}
                             />
                         </div>
@@ -118,12 +136,12 @@ const AddEmployee = () => {
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Position</label>
                         <div style={styles.row}>
-                            <FaBriefcase style={styles.icon} />
+                            <FaBriefcase style={styles.icon}/>
                             <input
                                 type="text"
                                 placeholder="Enter Position"
                                 value={formData.position}
-                                onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+                                onChange={(e) => setFormData({...formData, position: e.target.value})}
                                 style={styles.input}
                             />
                         </div>
@@ -133,17 +151,42 @@ const AddEmployee = () => {
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Department</label>
                         <div style={styles.row}>
-                            <FaBuilding style={styles.icon} />
+                            <FaBuilding style={styles.icon}/>
                             <input
                                 type="text"
                                 placeholder="Enter Department"
                                 value={formData.department}
-                                onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                                onChange={(e) => setFormData({...formData, department: e.target.value})}
                                 style={styles.input}
                             />
                         </div>
                         {errors.department && <p style={styles.errorText}>{errors.department}</p>}
                     </div>
+                    <div style={styles.formGroup}>
+                        <label style={styles.label}>Salary</label>
+                        <div style={styles.row}>
+                            <input
+                                type="number"
+                                placeholder="Enter Salary"
+                                value={formData.salary}
+                                onChange={(e) => setFormData({...formData, salary: e.target.value})}
+                                style={styles.input}
+                            />
+                        </div>
+                    </div>
+
+                    <div style={styles.formGroup}>
+                        <label style={styles.label}>Date of Joining</label>
+                        <div style={styles.row}>
+                            <input
+                                type="date"
+                                value={formData.date_of_joining}
+                                onChange={(e) => setFormData({...formData, date_of_joining: e.target.value})}
+                                style={styles.input}
+                            />
+                        </div>
+                    </div>
+
 
                     <div style={styles.buttonGroup}>
                         <button type="submit" style={styles.buttonSave}>Save</button>

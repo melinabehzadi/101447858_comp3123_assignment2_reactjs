@@ -182,17 +182,21 @@ const EmployeeList = () => {
                             <TableCell sx={styles.tableHeader}>Email</TableCell>
                             <TableCell sx={styles.tableHeader}>Position</TableCell>
                             <TableCell sx={styles.tableHeader}>Department</TableCell>
+                            <TableCell sx={styles.tableHeader}>Salary</TableCell>
+                            <TableCell sx={styles.tableHeader}>Date of Joining</TableCell>
                             <TableCell sx={styles.tableHeader}>Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {employees.map((employee) => (
                             <TableRow key={employee._id}>
-                                <TableCell sx={styles.tableData}>{employee.firstName}</TableCell>
-                                <TableCell sx={styles.tableData}>{employee.lastName}</TableCell>
+                                <TableCell sx={styles.tableData}>{employee.first_name}</TableCell> {/* Fix for first name */}
+                                <TableCell sx={styles.tableData}>{employee.last_name}</TableCell> {/* Fix for last name */}
                                 <TableCell sx={styles.tableData}>{employee.email}</TableCell>
                                 <TableCell sx={styles.tableData}>{employee.position}</TableCell>
                                 <TableCell sx={styles.tableData}>{employee.department}</TableCell>
+                                <TableCell sx={styles.tableData}>${employee.salary}</TableCell>
+                                <TableCell sx={styles.tableData}>{employee.date_of_joining?.split('T')[0]}</TableCell>
                                 <TableCell sx={styles.actionCell}>
                                     <Button
                                         variant="contained"

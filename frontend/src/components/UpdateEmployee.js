@@ -7,12 +7,15 @@ const UpdateEmployee = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
         position: '',
+        salary: '',
+        date_of_joining: '',
         department: '',
     });
+
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
@@ -73,7 +76,15 @@ const UpdateEmployee = () => {
         if (!validateForm()) return;
 
         try {
-            await API.put(`/employees/${id}`, formData);
+            await API.put(`/employees/${id}`, {
+                first_name: formData.firstName, // Use first_name
+                last_name: formData.lastName,  // Use last_name
+                email: formData.email,
+                position: formData.position,
+                department: formData.department,
+                salary: formData.salary,
+                date_of_joining: formData.date_of_joining,
+            });
             alert('Employee updated successfully!');
             navigate('/employees');
         } catch (error) {
@@ -81,6 +92,7 @@ const UpdateEmployee = () => {
             alert('Error updating employee');
         }
     };
+
 
     return (
         <div style={styles.container}>
@@ -90,12 +102,12 @@ const UpdateEmployee = () => {
                     <div style={styles.formGroup}>
                         <label style={styles.label}>First Name</label>
                         <div style={styles.row}>
-                            <FaUser style={styles.icon} />
+                            <FaUser style={styles.icon}/>
                             <input
                                 type="text"
                                 placeholder="Enter First Name"
                                 value={formData.firstName}
-                                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                                onChange={(e) => setFormData({...formData, firstName: e.target.value})}
                                 style={styles.input}
                             />
                         </div>
@@ -105,12 +117,12 @@ const UpdateEmployee = () => {
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Last Name</label>
                         <div style={styles.row}>
-                            <FaUser style={styles.icon} />
+                            <FaUser style={styles.icon}/>
                             <input
                                 type="text"
                                 placeholder="Enter Last Name"
                                 value={formData.lastName}
-                                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                                onChange={(e) => setFormData({...formData, lastName: e.target.value})}
                                 style={styles.input}
                             />
                         </div>
@@ -120,12 +132,12 @@ const UpdateEmployee = () => {
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Email</label>
                         <div style={styles.row}>
-                            <FaEnvelope style={styles.icon} />
+                            <FaEnvelope style={styles.icon}/>
                             <input
                                 type="email"
                                 placeholder="Enter Email"
                                 value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                onChange={(e) => setFormData({...formData, email: e.target.value})}
                                 style={styles.input}
                             />
                         </div>
@@ -135,12 +147,12 @@ const UpdateEmployee = () => {
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Position</label>
                         <div style={styles.row}>
-                            <FaBriefcase style={styles.icon} />
+                            <FaBriefcase style={styles.icon}/>
                             <input
                                 type="text"
                                 placeholder="Enter Position"
                                 value={formData.position}
-                                onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+                                onChange={(e) => setFormData({...formData, position: e.target.value})}
                                 style={styles.input}
                             />
                         </div>
@@ -150,17 +162,42 @@ const UpdateEmployee = () => {
                     <div style={styles.formGroup}>
                         <label style={styles.label}>Department</label>
                         <div style={styles.row}>
-                            <FaBuilding style={styles.icon} />
+                            <FaBuilding style={styles.icon}/>
                             <input
                                 type="text"
                                 placeholder="Enter Department"
                                 value={formData.department}
-                                onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                                onChange={(e) => setFormData({...formData, department: e.target.value})}
                                 style={styles.input}
                             />
                         </div>
                         {errors.department && <p style={styles.errorText}>{errors.department}</p>}
                     </div>
+                    <div style={styles.formGroup}>
+                        <label style={styles.label}>Salary</label>
+                        <div style={styles.row}>
+                            <input
+                                type="number"
+                                placeholder="Enter Salary"
+                                value={formData.salary}
+                                onChange={(e) => setFormData({...formData, salary: e.target.value})}
+                                style={styles.input}
+                            />
+                        </div>
+                    </div>
+
+                    <div style={styles.formGroup}>
+                        <label style={styles.label}>Date of Joining</label>
+                        <div style={styles.row}>
+                            <input
+                                type="date"
+                                value={formData.date_of_joining}
+                                onChange={(e) => setFormData({...formData, date_of_joining: e.target.value})}
+                                style={styles.input}
+                            />
+                        </div>
+                    </div>
+
 
                     <div style={styles.buttonGroup}>
                         <button type="submit" style={styles.buttonSave}>Update</button>
