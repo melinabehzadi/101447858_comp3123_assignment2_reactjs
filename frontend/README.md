@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+# **Employee Management System** 🧑‍💼👩‍💻
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **📜 Project Overview**
+This project is a **Full-Stack Employee Management System** built for managing employees in a professional environment. The primary goal of this assignment is to demonstrate **full-stack development skills** by creating a functional, aesthetically pleasing application with proper validation and deployment.
 
-## Available Scripts
+The system allows users to:
+- **Sign up** and **log in** securely. 🔐
+- **Add, view, update, delete, and search employees** efficiently. 📋
+- Leverage **professional UI/UX design** using Material UI. 🎨
 
-In the project directory, you can run:
+This project is **deployed using Docker Compose**, ensuring easy setup and scalability.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **⚙️ Features**
+### **Authentication** 🔑
+- **Signup**: Users can create an account with proper validations.
+- **Login/Logout**: Authenticated users can log in and securely access the app.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### **Employee Management** 🗂️
+- **Add Employee**: Add new employees with details like name, position, department, and email.
+- **View Employee**: View detailed information about an employee.
+- **Update Employee**: Edit employee details.
+- **Delete Employee**: Remove employees from the system.
+- **Search Employees**: Search by department or position for quick filtering.
 
-### `npm test`
+### **UI/UX** ✨
+- Fully responsive and professional design using **Material UI**.
+- Consistent theme and user-friendly interface.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## **🚀 How to Run the Project**
+This project is configured with **Docker Compose** to simplify running both the backend and frontend. Follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **Prerequisites**
+- Ensure Docker and Docker Compose are installed on your system. 🐳
+- Clone the repository:
+  ```bash
+  git clone https://github.com/your-username/your-repository.git
+  cd your-repository
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### **Run the Project**
+Start the application with Docker Compose:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+docker-compose up --build
+Access the application at http://localhost:3000.
 
-### `npm run eject`
+### **Stop the Application**
+To stop the running containers, use:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+docker-compose down
+🛠️ Technologies Used
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### **Frontend 🌐**
+React.js
+Material UI
+Axios for API calls.
+Backend ⚙️
+Node.js with Express.js
+MongoDB for database management.
+JWT Authentication with bcrypt for secure login.
+Deployment 🚀
+Docker Compose for backend and frontend orchestration.
+📝 Validations
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Form Validation: Proper error messages are displayed for empty fields, invalid email formats, etc.
+Server Validation: The backend handles invalid requests securely.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+----
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+### **🧪 API Endpoints**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Authentication**
 
-### Making a Progressive Web App
+POST /auth/signup - User Signup.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+POST /auth/login - User Login.
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+**Employee Management**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+GET /employees - List all employees.
 
-### `npm run build` fails to minify
+POST /employees - Add a new employee.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+GET /employees/:id - Get employee by ID.
+
+PUT /employees/:id - Update employee.
+
+DELETE /employees/:id - Delete employee.
+
+GET /employees/search - Search employees by department or position.
